@@ -1,0 +1,3 @@
+﻿,pred_non_fraud,pred_fraud
+actual_non_fraud,14286,336
+actual_fraud,106,272

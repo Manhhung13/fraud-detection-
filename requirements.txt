@@ -1,0 +1,17 @@
+﻿pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+openpyxl
+pyarrow
+joblib
+fastapi
+uvicorn
+streamlit
+pydantic
+python-dotenv
+tabulate
+catboost
+lightgbm
+xgboost

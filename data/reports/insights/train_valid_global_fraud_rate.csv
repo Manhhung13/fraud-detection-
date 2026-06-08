@@ -1,0 +1,3 @@
+split,fraud_rate,used_min_count
+train,0.025471428571428572,350
+validation,0.0252,75

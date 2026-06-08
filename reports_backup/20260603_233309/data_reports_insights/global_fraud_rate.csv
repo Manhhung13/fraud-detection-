@@ -1,0 +1,2 @@
+target_col,row_count,fraud_count,fraud_rate,used_min_count
+fraud,100000,2549,0.02549,500

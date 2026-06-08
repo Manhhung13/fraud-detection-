@@ -1,0 +1,2 @@
+num_rows,num_columns,duplicate_rows,duplicate_rate,total_missing_values,total_missing_rate,target_column,fraud_count,non_fraud_count,fraud_rate
+100000,59,0,0.0,0,0.0,fraud,2549,97451,0.02549

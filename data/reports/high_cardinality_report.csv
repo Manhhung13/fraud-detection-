@@ -1,0 +1,17 @@
+column,dtype,unique_count,unique_rate,note
+amount,float64,99765,0.99765,High cardinality - không nên one-hot trực tiếp
+local_timestamp,str,99371,0.99371,High cardinality - không nên one-hot trực tiếp
+mcc,int64,3351,0.03351,High cardinality - không nên one-hot trực tiếp
+ip_risk,str,100000,1.0,High cardinality - không nên one-hot trực tiếp
+device_id,str,100000,1.0,High cardinality - không nên one-hot trực tiếp
+merchant_id,str,100000,1.0,High cardinality - không nên one-hot trực tiếp
+card_activation_age,int64,4381,0.04381,High cardinality - không nên one-hot trực tiếp
+mean_amount_30d,float64,2252,0.02252,High cardinality - không nên one-hot trực tiếp
+std_amount_30d,float64,1494,0.01494,High cardinality - không nên one-hot trực tiếp
+max_amount_30d,float64,99827,0.99827,High cardinality - không nên one-hot trực tiếp
+txn_counts,str,39665,0.39665,High cardinality - không nên one-hot trực tiếp
+online_share_7d,float64,1001,0.01001,High cardinality - không nên one-hot trực tiếp
+night_ratio_30d,float64,1001,0.01001,High cardinality - không nên one-hot trực tiếp
+mcc_entropy_30d,float64,4001,0.04001,High cardinality - không nên one-hot trực tiếp
+credit_util_today,float64,2001,0.02001,High cardinality - không nên one-hot trực tiếp
+spending_trend,float64,4901,0.04901,High cardinality - không nên one-hot trực tiếp

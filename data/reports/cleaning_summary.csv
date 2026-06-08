@@ -1,0 +1,2 @@
+raw_rows,raw_columns,cleaned_rows,cleaned_columns,new_columns_added,raw_missing_values,cleaned_missing_values,duplicate_rows,invalid_amount_rows
+100000,36,100000,59,23,0,0,0,0

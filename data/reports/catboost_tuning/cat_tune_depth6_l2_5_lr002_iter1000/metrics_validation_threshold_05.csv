@@ -1,0 +1,2 @@
+﻿split,threshold,rows,fraud_count,fraud_rate,roc_auc,pr_auc,precision,recall,f1,f2,balanced_accuracy,review_rate,predicted_positive,tn,fp,fn,tp
+validation_threshold_05,0.5,15000,378,0.0252,0.8743778853203008,0.6438250083880185,0.2696214219759926,0.7724867724867724,0.3997262149212868,0.5626204238921002,0.8591951028348238,0.0722,1083,13831,791,86,292

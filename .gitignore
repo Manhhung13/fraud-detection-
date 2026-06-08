@@ -1,0 +1,23 @@
+# data
+data/raw/
+data/interim/
+data/processed/
+
+# models
+models/*.joblib
+models/*.pkl
+
+# cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# env
+.env
+.venv/
+venv/
+
+*.log
+
+# system
+.DS_Store   

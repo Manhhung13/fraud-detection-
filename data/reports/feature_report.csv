@@ -1,0 +1,4 @@
+﻿split,rows,columns,numeric_features,categorical_features,binary_features,interaction_features,all_model_features,target_col,fraud_count,fraud_rate
+train,70000,115,19,21,10,8,58,fraud,1783,0.025471428571428572
+validation,15000,115,19,21,10,8,58,fraud,378,0.0252
+test,15000,115,19,21,10,8,58,fraud,388,0.025866666666666666

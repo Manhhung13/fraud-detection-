@@ -1,48 +1,48 @@
 # Fraud Detection Project
 
-Du an xay dung pipeline phat hien gian lan giao dich tai chinh bang Machine Learning. Bai toan co target mat can bang manh, vi vay du an tap trung vao cac metric phu hop hon accuracy: `PR-AUC`, `F2-score`, `Precision`, `Recall` va `Review Rate`.
+Dự án xây dựng pipeline phát hiện gian lận giao dịch tài chính bằng Machine Learning. Bài toán có target mất cân bằng mạnh, vì vậy dự án tập trung vào các metric phù hợp hơn accuracy: `PR-AUC`, `F2-score`, `Precision`, `Recall` và `Review Rate`.
 
-Model cuoi cung hien tai la CatBoost, duoc promote vao `models/final_model/` va duoc dung boi FastAPI/Streamlit de demo inference.
+Model cuối cùng hiện tại là CatBoost, được promote vào `models/final_model/` và được dùng bởi FastAPI/Streamlit để demo inference.
 
-## 1. Cau truc thu muc
+## 1. Cấu trúc thư mục
 
 ```text
 fraud-detection-project/
-|-- app/                  # FastAPI API va Streamlit UI
+|-- app/                  # FastAPI API và Streamlit UI
 |   |-- api/
 |   `-- streamlit_app.py
 |-- data/
-|   |-- raw/              # Du lieu goc: fraud2.csv, fraud_metadata.xlsx
-|   |-- interim/          # Du lieu da clean tam thoi
-|   |-- processed/        # Train/validation/test va feature parquet
-|   `-- reports/          # CSV output tu EDA, mining, training
-|-- models/               # Model artifacts va metadata
-|-- notebooks/            # Notebook sinh tu pipeline/bao cao
-|-- reports/              # Bao cao Markdown tong hop
-|-- scripts/              # Entrypoint chay tung giai doan
-|-- src/                  # Source code pipeline noi bo
+|   |-- raw/              # Dữ liệu gốc: fraud2.csv, fraud_metadata.xlsx
+|   |-- interim/          # Dữ liệu đã clean tạm thời
+|   |-- processed/        # Train/validation/test và feature parquet
+|   `-- reports/          # CSV output từ EDA, mining, training
+|-- models/               # Model artifacts và metadata
+|-- notebooks/            # Notebook sinh từ pipeline/báo cáo
+|-- reports/              # Báo cáo Markdown tổng hợp
+|-- scripts/              # Entrypoint chạy từng giai đoạn
+|-- src/                  # Source code pipeline nội bộ
 |-- tests/                # Unit tests
 |-- requirements.txt
 `-- README.md
 ```
 
-## 2. Yeu cau moi truong
+## 2. Yêu cầu môi trường
 
-- Python 3.9 tro len. Du an hien da co `.venv` local, nhung nen tao moi neu clone sang may khac.
-- Windows PowerShell, macOS Terminal hoac Linux shell deu chay duoc.
-- Du lieu raw can dat trong `data/raw/`:
+- Python 3.9 trở lên. Dự án hiện đã có `.venv` local, nhưng nên tạo mới nếu clone sang máy khác.
+- Windows PowerShell, macOS Terminal hoặc Linux shell đều chạy được.
+- Dữ liệu raw cần đặt trong `data/raw/`:
   - `fraud2.csv`
   - `fraud_metadata.xlsx`
 
-Luu y: trong workspace hien tai file metadata dang co ten `fraud_metadata (2).xlsx`, trong khi script `01_run_data_overview.py` tim `fraud_metadata.xlsx`. Neu chay tu dau, hay doi ten file thanh:
+Lưu ý: trong workspace hiện tại file metadata đang có tên `fraud_metadata (2).xlsx`, trong khi script `01_run_data_overview.py` tìm `fraud_metadata.xlsx`. Nếu chạy từ đầu, hãy đổi tên file thành:
 
 ```powershell
 Rename-Item "data\raw\fraud_metadata (2).xlsx" "fraud_metadata.xlsx"
 ```
 
-## 3. Cai dat
+## 3. Cài đặt
 
-Tu thu muc goc du an:
+Từ thư mục gốc dự án:
 
 ```powershell
 cd E:\fraud-detection-project
@@ -52,7 +52,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Neu dung macOS/Linux:
+Nếu dùng macOS/Linux:
 
 ```bash
 cd fraud-detection-project
@@ -62,48 +62,48 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Neu PowerShell chan activate script, chay PowerShell bang quyen phu hop va set execution policy cho user hien tai:
+Nếu PowerShell chặn activate script, chạy PowerShell bằng quyền phù hợp và set execution policy cho user hiện tại:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
-## 4. Chay pipeline tung giai doan
+## 4. Chạy pipeline từng giai đoạn
 
-Tat ca lenh ben duoi chay tu thu muc goc `fraud-detection-project` va sau khi da activate virtual environment.
+Tất cả lệnh bên dưới chạy từ thư mục gốc `fraud-detection-project` và sau khi đã activate virtual environment.
 
-### Giai doan 1: Data understanding
+### Giai đoạn 1: Data understanding
 
-Doc `data/raw/fraud2.csv`, kiem tra cot target, tao cac bao cao tong quan.
+Đọc `data/raw/fraud2.csv`, kiểm tra cột target, tạo các báo cáo tổng quan.
 
 ```powershell
 python scripts/01_run_data_overview.py
 ```
 
-Output chinh:
+Output chính:
 
 - `data/reports/*.csv`
 - `reports/eda_report.md`
 
-### Giai doan 2: EDA
+### Giai đoạn 2: EDA
 
-Chay phan tich exploratory data analysis sau buoc overview.
+Chạy phân tích exploratory data analysis sau bước overview.
 
 ```powershell
 python scripts/02_run_eda.py
 ```
 
-Output chinh nam trong `data/reports/` va `reports/`.
+Output chính nằm trong `data/reports/` và `reports/`.
 
-### Giai doan 3: Insight mining va chia tap du lieu
+### Giai đoạn 3: Insight mining và chia tập dữ liệu
 
-Khai pha pattern/rule, tao insight report va tao cac file split train/validation/test.
+Khai phá pattern/rule, tạo insight report và tạo các file split train/validation/test.
 
 ```powershell
 python scripts/03_run_insight_mining.py
 ```
 
-Output chinh:
+Output chính:
 
 - `data/processed/train.parquet`
 - `data/processed/validation.parquet`
@@ -111,21 +111,21 @@ Output chinh:
 - `data/reports/insights/*.csv`
 - `reports/insight_stability_report.md`
 
-Neu can sinh them visualization cho insight mining:
+Nếu cần sinh thêm visualization cho insight mining:
 
 ```powershell
 python scripts/03_generate_mining_visualizations.py
 ```
 
-### Giai doan 4: Feature engineering
+### Giai đoạn 4: Feature engineering
 
-Tao feature day du va bo feature san sang dua vao model.
+Tạo feature đầy đủ và bộ feature sẵn sàng đưa vào model.
 
 ```powershell
 python scripts/04_build_features.py
 ```
 
-Output chinh:
+Output chính:
 
 - `data/processed/train_features.parquet`
 - `data/processed/validation_features.parquet`
@@ -136,21 +136,21 @@ Output chinh:
 - `data/processed/feature_metadata.json`
 - `reports/feature_engineering_report.md`
 
-### Giai doan 5: Train baseline Logistic Regression
+### Giai đoạn 5: Train baseline Logistic Regression
 
-Train model baseline va tim threshold theo validation set.
+Train model baseline và tìm threshold theo validation set.
 
 ```powershell
 python scripts/05_train_model.py
 ```
 
-Output chinh:
+Output chính:
 
 - `models/logistic_regression_pipeline.joblib`
 - `models/logistic_regression_metadata.json`
 - `data/reports/model/*.csv`
 
-Sinh bao cao baseline:
+Sinh báo cáo baseline:
 
 ```powershell
 python scripts/06_generate_baseline_report.py
@@ -160,40 +160,40 @@ Output:
 
 - `data/reports/model_report.md`
 
-### Giai doan 6: Chay cac experiment Logistic Regression
+### Giai đoạn 6: Chạy các experiment Logistic Regression
 
-So sanh cac cau hinh baseline khac nhau, dac biet la viec dung/khong dung `mcc` va rare category grouping.
+So sánh các cấu hình baseline khác nhau, đặc biệt là việc dùng/không dùng `mcc` và rare category grouping.
 
 ```powershell
 python scripts/05_run_experiments.py
 ```
 
-Output chinh:
+Output chính:
 
 - `models/experiments/*/pipeline.joblib`
 - `data/reports/model/experiments/*`
 - `data/reports/model/experiment_comparison.csv`
 - `reports/model_experiment_comparison.md`
 
-### Giai doan 7: Train model boosting
+### Giai đoạn 7: Train model boosting
 
-Chay LightGBM, XGBoost va CatBoost. Script nay cau hinh GPU cho cac boosting model.
+Chạy LightGBM, XGBoost và CatBoost. Script này cấu hình GPU cho các boosting model.
 
 ```powershell
 python scripts/08_train_gpu_boosting_models.py
 ```
 
-Output chinh:
+Output chính:
 
 - `models/gpu_boosting_experiments/*/pipeline.joblib`
 - `data/reports/gpu_boosting_models/*`
 - `reports/gpu_boosting_model_comparison.md`
 
-Neu may khong co GPU/CUDA/OpenCL phu hop, buoc nay co the loi. Khi do can chinh tham so trong `scripts/08_train_gpu_boosting_models.py` hoac model wrapper trong `src/models/` sang CPU.
+Nếu máy không có GPU/CUDA/OpenCL phù hợp, bước này có thể lỗi. Khi đó cần chỉnh tham số trong `scripts/08_train_gpu_boosting_models.py` hoặc model wrapper trong `src/models/` sang CPU.
 
-### Giai doan 8: Bao cao so sanh model cuoi
+### Giai đoạn 8: Báo cáo so sánh model cuối
 
-Tong hop so sanh model sau cac experiment.
+Tổng hợp so sánh model sau các experiment.
 
 ```powershell
 python scripts/09_generate_final_model_report.py
@@ -203,23 +203,23 @@ Output:
 
 - `reports/final_model_comparison_report.md`
 
-### Giai doan 9: Tune CatBoost
+### Giai đoạn 9: Tune CatBoost
 
-Chay tuning cac cau hinh CatBoost.
+Chạy tuning các cấu hình CatBoost.
 
 ```powershell
 python scripts/10_tune_catboost.py
 ```
 
-Output chinh:
+Output chính:
 
 - `models/catboost_tuning_experiments/*/pipeline.joblib`
 - `data/reports/catboost_tuning/*`
 - `data/reports/catboost_tuning/catboost_tuning_comparison.csv`
 
-### Giai doan 10: Promote final model
+### Giai đoạn 10: Promote final model
 
-Copy model tot nhat tu tuning experiments sang `models/final_model/` de app inference su dung.
+Copy model tốt nhất từ tuning experiments sang `models/final_model/` để app inference sử dụng.
 
 ```powershell
 python scripts/11_promote_final_model.py
@@ -231,15 +231,15 @@ Output:
 - `models/final_model/final_model_metadata.json`
 - `models/final_model/final_feature_importance.csv`
 
-Hien script promote dang chon experiment:
+Hiện script promote đang chọn experiment:
 
 ```text
 cat_tune_depth7_l2_8_lr003_iter700
 ```
 
-### Giai doan 11: Error analysis
+### Giai đoạn 11: Error analysis
 
-Phan tich false positive, false negative va cac nhom loi cua final model.
+Phân tích false positive, false negative và các nhóm lỗi của final model.
 
 ```powershell
 python scripts/12_run_error_analysis.py
@@ -248,11 +248,11 @@ python scripts/12_run_error_analysis.py
 Output:
 
 - `data/reports/final_error_analysis/*`
-- Bao cao lien quan trong `reports/`
+- Báo cáo liên quan trong `reports/`
 
-### Giai doan 12: Threshold policy
+### Giai đoạn 12: Threshold policy
 
-Danh gia chinh sach threshold theo nang luc review thu cong.
+Đánh giá chính sách threshold theo năng lực review thủ công.
 
 ```powershell
 python scripts/13_generate_threshold_policy.py
@@ -262,9 +262,9 @@ Output:
 
 - `data/reports/threshold_policy/threshold_policy_review_capacity.csv`
 
-### Giai doan 13: Tong hop final project report
+### Giai đoạn 13: Tổng hợp final project report
 
-Sinh bao cao tong ket cuoi cung cho du an.
+Sinh báo cáo tổng kết cuối cùng cho dự án.
 
 ```powershell
 python scripts/14_generate_final_project_report.py
@@ -274,17 +274,17 @@ Output:
 
 - `reports/FINAL_DS_PROJECT_REPORT.md`
 
-### Tuy chon: Sinh notebook
+### Tùy chọn: Sinh notebook
 
-Neu muon tao notebook tu project scripts/reports:
+Nếu muốn tạo notebook từ project scripts/reports:
 
 ```powershell
 python scripts/00_generate_project_notebooks.py
 ```
 
-## 5. Chay nhanh tu dau den cuoi
+## 5. Chạy nhanh từ đầu đến cuối
 
-Neu du lieu raw da dung ten va moi truong da cai xong, co the chay lan luot:
+Nếu dữ liệu raw đã đúng tên và môi trường đã cài xong, có thể chạy lần lượt:
 
 ```powershell
 python scripts/01_run_data_overview.py
@@ -303,22 +303,22 @@ python scripts/13_generate_threshold_policy.py
 python scripts/14_generate_final_project_report.py
 ```
 
-## 6. Chay API inference
+## 6. Chạy API inference
 
-API hien tai nhan input dang feature-ready, tuc la cac cot/feature da qua xu ly tu pipeline feature engineering.
+API hiện tại nhận input dạng feature-ready, tức là các cột/feature đã qua xử lý từ pipeline feature engineering.
 
-Chay server:
+Chạy server:
 
 ```powershell
 uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Mo cac endpoint:
+Mở các endpoint:
 
 - Swagger UI: `http://localhost:8000/docs`
 - Health check: `http://localhost:8000/health`
 
-Vi du request:
+Ví dụ request:
 
 ```powershell
 Invoke-RestMethod `
@@ -328,23 +328,23 @@ Invoke-RestMethod `
   -Body '{"features":{"mcc_entropy_30d":0.4,"night_ratio_30d":0.1,"log_amount_to_max_30d":0.8,"spending_trend":0.6}}'
 ```
 
-Luu y: vi model pipeline can day du cac feature da train, request thuc te nen dua bo feature day du giong schema cua `data/processed/model_train_features.parquet` tru cot `fraud`.
+Lưu ý: vì model pipeline cần đầy đủ các feature đã train, request thực tế nên đưa bộ feature đầy đủ giống schema của `data/processed/model_train_features.parquet` trừ cột `fraud`.
 
-## 7. Chay Streamlit UI
+## 7. Chạy Streamlit UI
 
-Streamlit demo dung final model trong `models/final_model/`.
+Streamlit demo dùng final model trong `models/final_model/`.
 
 ```powershell
 streamlit run app/streamlit_app.py
 ```
 
-Mac dinh UI mo tai:
+Mặc định UI mở tại:
 
 ```text
 http://localhost:8501
 ```
 
-Form Streamlit hien nhap feature-ready values va tra ve:
+Form Streamlit hiện nhập feature-ready values và trả về:
 
 - fraud probability
 - prediction
@@ -352,23 +352,23 @@ Form Streamlit hien nhap feature-ready values va tra ve:
 - decision
 - threshold
 
-## 8. Chinh sach risk hien tai
+## 8. Chính sách risk hiện tại
 
-Theo metadata cua final model:
+Theo metadata của final model:
 
-| Khoang probability | Risk level | Decision |
+| Khoảng probability | Risk level | Decision |
 | --- | --- | --- |
 | `< 0.30` | LOW | APPROVE |
-| `0.30` den `< selected_threshold` | MEDIUM | MANUAL_REVIEW |
+| `0.30` đến `< selected_threshold` | MEDIUM | MANUAL_REVIEW |
 | `>= selected_threshold` | HIGH | FRAUD_ALERT |
 
-Threshold cua final model duoc luu trong:
+Threshold của final model được lưu trong:
 
 ```text
 models/final_model/final_model_metadata.json
 ```
 
-## 9. Cac file bao cao quan trong
+## 9. Các file báo cáo quan trọng
 
 - `reports/FINAL_DS_PROJECT_REPORT.md`
 - `reports/final_model_comparison_report.md`
@@ -377,47 +377,47 @@ models/final_model/final_model_metadata.json
 - `reports/model_experiment_comparison.md`
 - `reports/feature_engineering_report.md`
 
-## 10. Loi thuong gap
+## 10. Lỗi thường gặp
 
-### Khong tim thay `fraud_metadata.xlsx`
+### Không tìm thấy `fraud_metadata.xlsx`
 
-Doi ten file metadata trong `data/raw/`:
+Đổi tên file metadata trong `data/raw/`:
 
 ```powershell
 Rename-Item "data\raw\fraud_metadata (2).xlsx" "fraud_metadata.xlsx"
 ```
 
-### Khong tim thay final model khi chay API/UI
+### Không tìm thấy final model khi chạy API/UI
 
-Chay promote model:
+Chạy promote model:
 
 ```powershell
 python scripts/11_promote_final_model.py
 ```
 
-Neu chua co tuning experiment source, can chay truoc:
+Nếu chưa có tuning experiment source, cần chạy trước:
 
 ```powershell
 python scripts/10_tune_catboost.py
 ```
 
-### Loi import CatBoost/LightGBM/XGBoost
+### Lỗi import CatBoost/LightGBM/XGBoost
 
-Cai them package model nang cao:
+Cài thêm package model nâng cao:
 
 ```powershell
 pip install catboost lightgbm xgboost
 ```
 
-### Loi GPU khi train boosting
+### Lỗi GPU khi train boosting
 
-Chay buoc baseline truoc de co model/report, sau do sua cau hinh boosting sang CPU neu may khong co GPU phu hop. Cac file lien quan:
+Chạy bước baseline trước để có model/report, sau đó sửa cấu hình boosting sang CPU nếu máy không có GPU phù hợp. Các file liên quan:
 
 - `scripts/08_train_gpu_boosting_models.py`
 - `src/models/catboost_model.py`
 - `src/models/lightgbm_model.py`
 - `src/models/xgboost_model.py`
 
-### API/UI nhan feature-ready input
+### API/UI nhận feature-ready input
 
-Du an hien chua co realtime raw-transaction feature builder trong API. Neu muon predict tu giao dich raw, can them mot inference feature pipeline dung cung logic voi `src/features/build_features.py`.
+Dự án hiện chưa có realtime raw-transaction feature builder trong API. Nếu muốn predict từ giao dịch raw, cần thêm một inference feature pipeline dùng cùng logic với `src/features/build_features.py`.

@@ -1,0 +1,68 @@
+{
+  "promoted_at": "2026-06-07T11:20:00",
+  "final_experiment_name": "cat_tune_depth7_l2_8_lr003_iter700",
+  "model_name": "catboost",
+  "model_file": "fraud_catboost_final.joblib",
+  "source_model_path": "E:\\fraud-detection-project\\models\\catboost_tuning_experiments\\cat_tune_depth7_l2_8_lr003_iter700\\pipeline.joblib",
+  "selected_threshold": 0.66,
+  "business_threshold_source": "selected on validation, applied to test",
+  "mcc_strategy": "use mcc with rare category grouping min_frequency=100",
+  "drop_manual_interactions": true,
+  "test_metrics": {
+    "split": "test",
+    "threshold": 0.66,
+    "rows": 15000,
+    "fraud_count": 388,
+    "fraud_rate": 0.0258666666666666,
+    "roc_auc": 0.901009550122622,
+    "pr_auc": 0.7027483179633467,
+    "precision": 0.5008319467554077,
+    "recall": 0.7757731958762887,
+    "f1": 0.6086956521739131,
+    "f2": 0.6990246168137483,
+    "balanced_accuracy": 0.8776210627615771,
+    "review_rate": 0.0400666666666666,
+    "predicted_positive": 601,
+    "tn": 14312,
+    "fp": 300,
+    "fn": 87,
+    "tp": 301
+  },
+  "validation_metrics": {
+    "split": "validation_best_threshold",
+    "threshold": 0.66,
+    "rows": 15000,
+    "fraud_count": 378,
+    "fraud_rate": 0.0252,
+    "roc_auc": 0.8716386629120867,
+    "pr_auc": 0.6498549270819864,
+    "precision": 0.497196261682243,
+    "recall": 0.7037037037037037,
+    "f1": 0.5826944140197152,
+    "f2": 0.6497313141182218,
+    "balanced_accuracy": 0.8426533837900272,
+    "review_rate": 0.0356666666666666,
+    "predicted_positive": 535,
+    "tn": 14353,
+    "fp": 269,
+    "fn": 112,
+    "tp": 266
+  },
+  "business_policy": {
+    "low": {
+      "condition": "fraud_probability < 0.30",
+      "risk_level": "LOW",
+      "decision": "APPROVE"
+    },
+    "medium": {
+      "condition": "0.30 <= fraud_probability < selected_threshold",
+      "risk_level": "MEDIUM",
+      "decision": "MANUAL_REVIEW"
+    },
+    "high": {
+      "condition": "fraud_probability >= selected_threshold",
+      "risk_level": "HIGH",
+      "decision": "FRAUD_ALERT"
+    }
+  }
+}

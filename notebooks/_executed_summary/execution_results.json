@@ -1,0 +1,56 @@
+[
+  {
+    "notebook": "01_data_understanding.ipynb",
+    "ok": true,
+    "seconds": 12.85,
+    "stdout": ""
+  },
+  {
+    "notebook": "02_univariate_eda.ipynb",
+    "ok": true,
+    "seconds": 8.85,
+    "stdout": ""
+  },
+  {
+    "notebook": "03_bivariate_eda_with_target.ipynb",
+    "ok": true,
+    "seconds": 9.81,
+    "stdout": ""
+  },
+  {
+    "notebook": "04_hidden_insight_mining.ipynb",
+    "ok": true,
+    "seconds": 7.58,
+    "stdout": ""
+  },
+  {
+    "notebook": "05_feature_engineering_experiment.ipynb",
+    "ok": true,
+    "seconds": 7.23,
+    "stdout": ""
+  },
+  {
+    "notebook": "06_model_baseline_logistic.ipynb",
+    "ok": true,
+    "seconds": 6.58,
+    "stdout": ""
+  },
+  {
+    "notebook": "07_advanced_model_comparison.ipynb",
+    "ok": true,
+    "seconds": 6.54,
+    "stdout": ""
+  },
+  {
+    "notebook": "08_final_model_explainability.ipynb",
+    "ok": true,
+    "seconds": 6.78,
+    "stdout": ""
+  },
+  {
+    "notebook": "09_error_analysis_and_threshold_policy.ipynb",
+    "ok": true,
+    "seconds": 6.71,
+    "stdout": ""
+  }
+]
